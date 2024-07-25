@@ -15,6 +15,7 @@
     "lintfix": "eslint . --fix && prettier --write --list-different ."
   },
   "dependencies": {
+    "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.414.0",
@@ -23,6 +24,7 @@
     "shadcn-nuxt": "^0.10.4",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
+    "vaul-vue": "^0.2.0",
     "vue": "latest"
   },
   "devDependencies": {

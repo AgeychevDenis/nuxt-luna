@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <Button>Click me</Button>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
-
-<style lang="scss">
-.test {
-}
-</style>
