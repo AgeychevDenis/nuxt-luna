@@ -14,11 +14,17 @@
     "lint:prettier": "prettier . --check",
     "lintfix": "eslint . --fix && prettier --write --list-different .",
     "prisma:push": "npx prisma db push",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "prisma:seed": "npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.js"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.2",
     "@prisma/nuxt": "^0.0.34",
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.414.0",
@@ -37,6 +43,7 @@
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@prisma/client": "^5.17.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^22.0.0",
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
     "eslint": "^8.57.0",
@@ -44,6 +51,8 @@
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.3.3",
     "sass": "^1.77.8",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.16.3",
     "typescript": "^5.5.4"
   },
   "overrides": {
