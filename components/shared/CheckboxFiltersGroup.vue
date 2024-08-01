@@ -7,6 +7,7 @@
 
     <div class="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
       <FilterCheckbox
+        v-if="!isLoading"
         v-for="(item, index) in list"
         :key="index"
         :text="item.text"
@@ -14,6 +15,7 @@
         :checked="false"
         :onCheckedChange="() => console.log(item)"
       />
+      <Skeleton v-else v-for="item in limit" class="h-6 rounded-[8px]" />
     </div>
 
     <div class="border-t border-t-neutral-100 mt-4">
@@ -34,6 +36,7 @@ interface Props {
   items: Item[]
   defaultItems: Item[]
   limit?: number
+  isLoading: boolean
   searchInputPlaceholder?: string
   onChange?: (value: string[]) => void
 }

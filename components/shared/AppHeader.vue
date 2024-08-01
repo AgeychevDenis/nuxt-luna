@@ -1,12 +1,16 @@
 <template>
   <header class="border border-b">
     <AppContainer class="flex items-center justify-between py-8">
-      <div class="flex items-center gap-4">
+      <NuxtLink to="/" class="flex items-center gap-4">
         <img src="/logo.png" width="35px" height="35px" alt="logo" />
         <div>
           <h1 class="text-2xl uppercase font-black">Nuxt Pizza</h1>
           <p class="text-sm text-gray-400 leading-3">вкусней уже некуда</p>
         </div>
+      </NuxtLink>
+
+      <div class="mx-10 flex-1">
+        <SearchInput />
       </div>
 
       <div class="flex items-center gap-3">
@@ -37,7 +41,9 @@
 <script setup lang="ts">
 import { ArrowRight, ShoppingCart, User } from 'lucide-vue-next'
 
-import AppContainer from '@/components/shared/AppContainer.vue'
+import { AppContainer, SearchInput } from '@/components/shared'
+
+import { products } from '~/prisma/constants'
 </script>
 
 <style scoped></style>

@@ -20,27 +20,10 @@
 
       <CheckboxFiltersGroup
         title="Ингредиенты"
-        :limit="1"
-        :items="[
-          { text: 'Сырный соус', value: '1' },
-          { text: 'Моццарелла', value: '2' },
-          { text: 'Чеснок', value: '3' },
-          { text: 'Соленный огурчики', value: '4' },
-          { text: 'Красный лук', value: '5' },
-          { text: 'Томаты', value: '5' },
-          { text: 'Сырный соус', value: '12' },
-          { text: 'Моццарелла', value: '22' },
-          { text: 'Чеснок', value: '32' },
-          { text: 'Соленный огурчики', value: '42' },
-          { text: 'Красный лук', value: '52' },
-          { text: 'Томаты', value: '52' },
-        ]"
-        :default-items="[
-          { text: 'Сырный соус', value: '1' },
-          { text: 'Моццарелла', value: '2' },
-          { text: 'Чеснок', value: '3' },
-          { text: 'Соленный огурчики', value: '4' },
-        ]"
+        :limit="6"
+        :items="items"
+        :default-items="items"
+        :is-loading="isLoading"
         class="mt-5"
       />
     </div>
@@ -49,6 +32,26 @@
 
 <script setup lang="ts">
 import { AppTitle, CheckboxFiltersGroup, FilterCheckbox, RangeSlider } from '@/components/shared'
+
+import { useFilterIngredients } from '@/composables/useFilterIngredients'
+
+interface Items {
+  value: string
+  text: string
+}
+
+const items = ref<Items[]>([])
+const isLoading = ref(false)
+
+onMounted(async () => {
+  isLoading.value = true
+
+  const { ingredients } = await useFilterIngredients()
+
+  items.value = ingredients?.map((item) => ({ value: String(item.id), text: String(item.name) }))
+
+  isLoading.value = false
+})
 </script>
 
 <style scoped></style>
