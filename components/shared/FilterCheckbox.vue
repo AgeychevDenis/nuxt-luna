@@ -1,7 +1,13 @@
 <template>
   <div class="flex items-center space-x-2">
-    <Checkbox @click="onCheckedChange" :value="value" class="rounded-[8px] w-6 h-6" :id="`checkbox-${name}-${String(value)}`" />
-    <label :for="`checkbox-${name}-${String(value)}`" class="leading-none cursor-pointer flex-1">{{ text }}</label>
+    <Checkbox
+      @click="onCheckedChange"
+      :value="value"
+      class="rounded-[8px] w-6 h-6"
+      :id="`checkbox-${String(name)}-${String(value)}`"
+      :checked="checked"
+    />
+    <label :for="`checkbox-${String(name)}-${String(value)}`" class="leading-none cursor-pointer flex-1">{{ text }}</label>
   </div>
 </template>
 

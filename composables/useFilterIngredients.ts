@@ -8,10 +8,12 @@ interface ReturnProps {
 
 export const useFilterIngredients = async (): Promise<ReturnProps> => {
   let ingredients: Ingredient[] = []
+
   try {
     ingredients = await Api.ingredients.getAll()
   } catch (error) {
     console.error(error)
+  } finally {
   }
 
   return { ingredients }

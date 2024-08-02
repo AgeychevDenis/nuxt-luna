@@ -12,13 +12,14 @@
         :key="index"
         :text="item.text"
         :value="item.value"
-        :checked="false"
-        :onCheckedChange="() => console.log(item)"
+        :name="name"
+        :on-checked-change="() => onClickCheckbox?.(item.value)"
+        :checked="selectedIds?.has(item.value)"
       />
-      <Skeleton v-else v-for="item in limit" class="h-6 rounded-[8px]" />
+      <Skeleton v-else v-for="item in limit" :key="item" class="h-6 rounded-[8px]" />
     </div>
 
-    <div class="border-t border-t-neutral-100 mt-4">
+    <div v-if="items.length > limit" class="border-t border-t-neutral-100 mt-4">
       <Button @click="isShowAll = !isShowAll" class="text-primary mt-3" variant="secondary">{{ textBtn }}</Button>
     </div>
   </div>
@@ -32,13 +33,15 @@ import type { FilterCheckboxProps } from './FilterCheckbox.vue'
 type Item = FilterCheckboxProps
 
 interface Props {
+  name: string
   title: string
   items: Item[]
-  defaultItems: Item[]
+  defaultItems?: Item[]
   limit?: number
   isLoading: boolean
   searchInputPlaceholder?: string
-  onChange?: (value: string[]) => void
+  onClickCheckbox?: (value: string) => void
+  selectedIds?: Set<string>
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -54,7 +57,7 @@ const textBtn = computed(() => (isShowAll.value ? 'Скрыть' : '+ Показ
 const list = computed(() => {
   return isShowAll.value
     ? props.items.filter((item) => item.text.toLocaleLowerCase().includes(searchValue.value.toLocaleLowerCase()))
-    : props.defaultItems.slice(0, props.limit)
+    : (props.defaultItems || props.items).slice(0, props.limit)
 })
 </script>
 

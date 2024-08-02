@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { AppTitle, ProductCard } from '@/components/shared'
 
-import { useCategoryStore } from '@/stores/CategoryStore.ts'
+import { useCategoryStore } from '@/stores/CategoryStore'
 
 interface Props {
   title: string
