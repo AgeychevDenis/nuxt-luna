@@ -57,11 +57,11 @@
 
 <script setup lang="ts">
 import qs from 'qs'
-import type { LocationQueryValue } from 'vue-router'
 
 import { AppTitle, CheckboxFiltersGroup, RangeSlider } from '@/components/shared'
 
 import { useFilterIngredients } from '@/composables/useFilterIngredients'
+import { processQuery, toggleItemsIds } from '@/composables/useFilters'
 
 interface Items {
   value: string
@@ -77,18 +77,12 @@ const router = useRouter()
 const query = useRoute().query
 
 const items = ref<Items[]>([])
-const isLoading = ref(false)
 const price = ref<PriceProps>({
   priceFrom: Number(query.priceFrom) || 0,
   priceTo: Number(query.priceTo) || 0,
 })
 
-const processQuery = (queryField: LocationQueryValue | LocationQueryValue[] | undefined) => {
-  if (Array.isArray(queryField)) {
-    return new Set<string>()
-  }
-  return new Set<string>(queryField?.split(',') || [])
-}
+const isLoading = ref(false)
 
 const sizesIds = ref(processQuery(query.sizes))
 const pizzaTypesIds = ref(processQuery(query.pizzaTypes))
@@ -97,14 +91,6 @@ const ingredientsIds = ref(processQuery(query.ingredients))
 const updatePriceFromSlider = (newValues: number[]) => {
   price.value.priceFrom = newValues[0]
   price.value.priceTo = newValues[1]
-}
-
-const toggleItemsIds = (item: string, items: Set<string>) => {
-  if (items.has(item)) {
-    items.delete(item)
-  } else {
-    items.add(item)
-  }
 }
 
 watch(
