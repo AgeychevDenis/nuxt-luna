@@ -2,7 +2,7 @@
   <AppContainer class="mt-10">
     <AppTitle text="Все пиццы" size="lg" class="font-extrabold" />
   </AppContainer>
-  <TopBar />
+  <TopBar :categories="categoriesTopBar" />
 
   <AppContainer class="mt-10 pb-14">
     <div class="flex gap-[60px]">
@@ -11,102 +11,14 @@
       </div>
       <div class="flex-1">
         <div class="flex flex-col gap-16">
-          <ProductsGroupList
-            title="Пиццы"
-            :categoryId="1"
-            :items="[
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-            ]"
-          />
-          <ProductsGroupList
-            title="Комбо"
-            :categoryId="2"
-            :items="[
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EF438E93884BFEBFE79D11095AE2D4.avif',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-            ]"
-          />
+          <template v-for="category in data" :key="category.id">
+            <ProductsGroupList
+              v-if="category.products.length > 0"
+              :title="category.name"
+              :categoryId="category.id"
+              :items="category.products"
+            />
+          </template>
         </div>
       </div>
     </div>
@@ -114,7 +26,17 @@
 </template>
 
 <script setup lang="ts">
+import type { Category, Product } from '@prisma/client'
+
 import { AppContainer, AppFilters, AppTitle, ProductsGroupList, TopBar } from '@/components/shared'
+
+interface Categories extends Category {
+  products: Product[]
+}
+
+const { data } = await useFetch<Categories[]>('/api/categories')
+
+const categoriesTopBar = computed(() => data.value?.filter((category) => category.products.length > 0) || [])
 </script>
 
 <style scoped></style>

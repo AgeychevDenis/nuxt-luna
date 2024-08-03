@@ -13,7 +13,7 @@
         { text: '40 см', value: '40' },
       ]"
       :is-loading="false"
-      :on-click-checkbox="(id) => toggleItemsIds(id, sizesIds)"
+      :on-click-checkbox="(id) => useToggleItemsIds(id, sizesIds)"
       :selected-ids="sizesIds"
     />
 
@@ -26,7 +26,7 @@
         { text: 'Тонкое', value: '1' },
         { text: 'Традиционное', value: '2' },
       ]"
-      :on-click-checkbox="(id) => toggleItemsIds(id, pizzaTypesIds)"
+      :on-click-checkbox="(id) => useToggleItemsIds(id, pizzaTypesIds)"
       :selected-ids="pizzaTypesIds"
     />
 
@@ -48,7 +48,7 @@
         :default-items="items"
         :is-loading="isLoading"
         class="mt-5"
-        :on-click-checkbox="(id) => toggleItemsIds(id, ingredientsIds)"
+        :on-click-checkbox="(id) => useToggleItemsIds(id, ingredientsIds)"
         :selected-ids="ingredientsIds"
       />
     </div>
@@ -56,42 +56,17 @@
 </template>
 
 <script setup lang="ts">
-import qs from 'qs'
-
 import { AppTitle, CheckboxFiltersGroup, RangeSlider } from '@/components/shared'
-
-import { useFilterIngredients } from '@/composables/useFilterIngredients'
-import { processQuery, toggleItemsIds } from '@/composables/useFilters'
 
 interface Items {
   value: string
   text: string
 }
 
-interface PriceProps {
-  priceFrom: number
-  priceTo: number
-}
-
-const router = useRouter()
-const query = useRoute().query
+const { sizesIds, pizzaTypesIds, ingredientsIds, price, updatePriceFromSlider } = useFilters()
 
 const items = ref<Items[]>([])
-const price = ref<PriceProps>({
-  priceFrom: Number(query.priceFrom) || 0,
-  priceTo: Number(query.priceTo) || 0,
-})
-
 const isLoading = ref(false)
-
-const sizesIds = ref(processQuery(query.sizes))
-const pizzaTypesIds = ref(processQuery(query.pizzaTypes))
-const ingredientsIds = ref(processQuery(query.ingredients))
-
-const updatePriceFromSlider = (newValues: number[]) => {
-  price.value.priceFrom = newValues[0]
-  price.value.priceTo = newValues[1]
-}
 
 watch(
   price,
@@ -107,29 +82,17 @@ watch(
   { deep: true }
 )
 
-watch(
-  [price, ingredientsIds, sizesIds, pizzaTypesIds],
-  () => {
-    const filters = {
-      ...price.value,
-      pizzaTypes: Array.from(pizzaTypesIds.value),
-      sizes: Array.from(sizesIds.value),
-      ingredients: Array.from(ingredientsIds.value),
-    }
-
-    const query = qs.stringify(filters, {
-      arrayFormat: 'comma',
-    })
-
-    router.push(`?${query}`)
-  },
-  { deep: true }
-)
+useQueryFilters({
+  price,
+  ingredientsIds,
+  sizesIds,
+  pizzaTypesIds,
+})
 
 onMounted(async () => {
   isLoading.value = true
 
-  const { ingredients } = await useFilterIngredients()
+  const { ingredients } = await useIngredientsFilters()
 
   items.value = ingredients?.map((item) => ({ value: String(item.id), text: String(item.name) }))
 

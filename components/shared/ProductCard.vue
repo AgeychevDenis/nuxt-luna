@@ -1,16 +1,13 @@
 <template>
   <div>
-    <NuxtLink>
+    <PlusModalLink :to="getProductPath(id)">
       <div class="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
         <img class="w-[215px] h-[215px]" :src="imageUrl" :alt="name" />
       </div>
 
       <AppTitle :text="name" size="sm" class="mb-1 mt-3 font-bold" />
 
-      <p class="text-sm text-gray-400">
-        Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус
-        альфредо, чеснок
-      </p>
+      <p class="text-sm text-gray-400">Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус альфредо, чеснок</p>
 
       <div class="flex justify-between items-center mt-4">
         <span class="text-[20px]">
@@ -23,7 +20,7 @@
           Добавить
         </Button>
       </div>
-    </NuxtLink>
+    </PlusModalLink>
   </div>
 </template>
 
@@ -38,6 +35,8 @@ interface Props {
   price: number
   imageUrl: string
 }
+
+const getProductPath = (id: number) => `/product/${id}`
 
 defineProps<Props>()
 </script>

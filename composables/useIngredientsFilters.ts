@@ -6,7 +6,7 @@ interface ReturnProps {
   ingredients: Ingredient[]
 }
 
-export const useFilterIngredients = async (): Promise<ReturnProps> => {
+export const useIngredientsFilters = async (): Promise<ReturnProps> => {
   let ingredients: Ingredient[] = []
 
   try {
