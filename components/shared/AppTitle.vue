@@ -1,5 +1,5 @@
 <template>
-  <component :is="mapTagBySize[size]" :class="[mapClassNameBySize[size]]">
+  <component :is="mapTagBySize[size]" :class="mapClassNameBySize[size]">
     {{ text }}
   </component>
 </template>

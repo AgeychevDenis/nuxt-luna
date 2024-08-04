@@ -3,15 +3,15 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from '@prisma/client'
-
 import { ChooseProductModal } from '@/components/shared'
+
+import type { ProductWithRelation } from '@/@types/prisma'
 
 const parentRoute = useParentRoute()
 
 const id = computed(() => Number.parseInt(parentRoute.params.id as string) || 1)
 
-const { data } = await useFetch<Product>(`/api/products/product/${id.value}`)
+const { data } = await useFetch<ProductWithRelation>(`/api/products/product/${id.value}`)
 
 if (!data.value) {
   await navigateTo({ path: '/404' })

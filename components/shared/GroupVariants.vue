@@ -6,10 +6,7 @@
       variant="ghost"
       @click="() => onClick?.(item.value)"
       class="flex items-center justify-center cursor-pointer h-[30px] px-5 flex-1 rounded-3xl transition-all duration-400 text-sm"
-      :class="[
-        { 'bg-white shadow': item.value === selectedValue },
-        { 'text-gray-500 opacity-50 pointer-events-none': item.disabled },
-      ]"
+      :class="[{ 'bg-white shadow': item.value === value }, { 'text-gray-500 opacity-50 pointer-events-none': item.disabled }]"
     >
       {{ item.name }}
     </Button>
@@ -27,7 +24,7 @@ interface Props {
   items: readonly Variant[]
   defaultValue?: string
   onClick?: (value: Variant['value']) => void
-  selectedValue?: Variant['value']
+  value?: Variant['value']
 }
 
 defineProps<Props>()

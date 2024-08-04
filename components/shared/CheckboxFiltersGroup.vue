@@ -56,7 +56,7 @@ const textBtn = computed(() => (isShowAll.value ? 'Скрыть' : '+ Показ
 
 const list = computed(() => {
   return isShowAll.value
-    ? props.items.filter((item) => item.text.toLocaleLowerCase().includes(searchValue.value.toLocaleLowerCase()))
+    ? props.items.filter((item: Item) => item.text.toLocaleLowerCase().includes(searchValue.value.toLocaleLowerCase()))
     : (props.defaultItems || props.items).slice(0, props.limit)
 })
 </script>

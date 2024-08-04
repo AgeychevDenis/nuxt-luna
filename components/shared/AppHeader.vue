@@ -42,8 +42,6 @@
 import { ArrowRight, ShoppingCart, User } from 'lucide-vue-next'
 
 import { AppContainer, SearchInput } from '@/components/shared'
-
-import { products } from '~/prisma/constants'
 </script>
 
 <style scoped></style>

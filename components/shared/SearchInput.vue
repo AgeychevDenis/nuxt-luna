@@ -50,7 +50,7 @@ const onClickItem = () => {
   searchQuery.value = ''
 }
 
-const debouncedSearch = useDebounceFn(async (newVal) => {
+const debouncedSearch = useDebounceFn(async (newVal: string) => {
   try {
     products.value = await Api.products.search(newVal)
   } catch (error) {
@@ -58,7 +58,7 @@ const debouncedSearch = useDebounceFn(async (newVal) => {
   }
 }, 300)
 
-watch(searchQuery, (newVal) => debouncedSearch(newVal))
+watch(searchQuery, (newVal: string) => debouncedSearch(newVal))
 </script>
 
 <style scoped></style>

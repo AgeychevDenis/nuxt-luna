@@ -13,7 +13,7 @@
         { text: '40 см', value: '40' },
       ]"
       :is-loading="false"
-      :on-click-checkbox="(id) => useToggleItemsIds(id, sizesIds)"
+      :on-click-checkbox="(id: string) => useToggleItemsIds(id, sizesIds)"
       :selected-ids="sizesIds"
     />
 
@@ -26,7 +26,7 @@
         { text: 'Тонкое', value: '1' },
         { text: 'Традиционное', value: '2' },
       ]"
-      :on-click-checkbox="(id) => useToggleItemsIds(id, pizzaTypesIds)"
+      :on-click-checkbox="(id: string) => useToggleItemsIds(id, pizzaTypesIds)"
       :selected-ids="pizzaTypesIds"
     />
 
@@ -48,7 +48,7 @@
         :default-items="items"
         :is-loading="isLoading"
         class="mt-5"
-        :on-click-checkbox="(id) => useToggleItemsIds(id, ingredientsIds)"
+        :on-click-checkbox="(id: string) => useToggleItemsIds(id, ingredientsIds)"
         :selected-ids="ingredientsIds"
       />
     </div>
@@ -57,6 +57,8 @@
 
 <script setup lang="ts">
 import { AppTitle, CheckboxFiltersGroup, RangeSlider } from '@/components/shared'
+
+import type { PriceProps } from '@/composables/useQueryFilters'
 
 interface Items {
   value: string
@@ -70,7 +72,7 @@ const isLoading = ref(false)
 
 watch(
   price,
-  (newVal) => {
+  (newVal: PriceProps) => {
     if (!newVal.priceFrom) {
       price.value.priceFrom = 0
     }

@@ -33,7 +33,7 @@ const localValues = ref([valuesModel.value?.priceFrom || 0, valuesModel.value?.p
 
 watch(
   localValues,
-  (newValues) => {
+  (newValues: number[]) => {
     if (props.onValueChange) {
       props.onValueChange(newValues)
     }

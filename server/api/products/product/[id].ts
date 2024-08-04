@@ -15,7 +15,26 @@ export default defineEventHandler(async (event) => {
     return notFoundError()
   }
 
-  const product = await prisma.product.findFirst({ where: { id } })
+  const product = await prisma.product.findFirst({
+    where: {
+      id,
+    },
+    include: {
+      ingredients: true,
+      items: {
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          product: {
+            include: {
+              items: true,
+            },
+          },
+        },
+      },
+    },
+  })
 
   if (!product) {
     return notFoundError()
