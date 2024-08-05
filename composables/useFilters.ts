@@ -2,6 +2,18 @@ import type { LocationQueryValue } from 'vue-router'
 
 import type { PriceProps } from '@/composables/useQueryFilters'
 
+/**
+ * Функция для добавление/удаление ids в Объект Set
+ *
+ * @example
+ * ```
+ * useToggleItemsIds(id, pizzaIds)
+ * ```
+ *
+ * @param item - элемент
+ * @param items - список элементов Set
+ */
+
 const useToggleItemsIds = (item: string, items: Set<string>) => {
   if (items.has(item)) {
     items.delete(item)
@@ -9,6 +21,12 @@ const useToggleItemsIds = (item: string, items: Set<string>) => {
     items.add(item)
   }
 }
+
+/** Функция парсинга query строки из url
+ *
+ * @param queryField - поле
+ * @returns новый объект Set с ключами
+ */
 
 const useProcessQuery = (queryField: LocationQueryValue | LocationQueryValue[] | undefined) => {
   if (Array.isArray(queryField)) {

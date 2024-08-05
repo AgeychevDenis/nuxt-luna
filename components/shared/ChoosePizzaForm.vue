@@ -5,7 +5,7 @@
     <div class="w-[490px] bg-[#f7f6f5] p-7">
       <AppTitle :text="name" size="md" class="font-extrabold mb-1" />
 
-      <p class="text-gray-400 mb-4">{{ textDetaills }}</p>
+      <p class="text-gray-400 mb-4">{{ textDetails }}</p>
 
       <GroupVariants
         :items="availablePizzaSizes"
@@ -63,7 +63,7 @@ const props = defineProps<Props>()
 const size = ref<PizzaSize>(20)
 const type = ref<PizzaType>(1)
 
-const textDetaills = computed(() => `${size.value} см, ${mapPizzType[type.value]} пицца`)
+const textDetails = computed(() => `${size.value} см, ${mapPizzType[type.value]} пицца`)
 
 const selectedIngredients = ref(new Set<string>([]))
 
@@ -87,6 +87,10 @@ const availablePizzaSizes = computed(() => {
   }))
 })
 
+const handleOnClick = () => {
+  props.onClickAddCart?.()
+}
+
 watch(type, () => {
   const isAvailableSize = availablePizzaSizes.value.find((item) => Number(item.value) === size.value && !item.disabled)
   const availableSizes = availablePizzaSizes.value.find((item) => !item.disabled)
@@ -95,8 +99,4 @@ watch(type, () => {
     size.value = Number(availableSizes.value) as PizzaSize
   }
 })
-
-const handleOnClick = () => {
-  props.onClickAddCart?.()
-}
 </script>
