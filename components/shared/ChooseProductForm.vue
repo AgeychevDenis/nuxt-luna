@@ -7,9 +7,9 @@
     <div class="w-[490px] bg-[#f7f6f5] p-7">
       <AppTitle :text="name" size="md" class="font-extrabold mb-1" />
 
-      <p class="text-gray-400 mb-6">{{ textDetaills }}</p>
-
-      <Button class="h-[55px] px-10 text-base rounded-[18px] w-full">Добавить в корзину за {{ totalPrice }} ₽</Button>
+      <Button @click="onSubmit" class="h-[55px] px-10 text-base rounded-[18px] w-full">
+        Добавить в корзину за {{ price }} ₽
+      </Button>
     </div>
   </div>
 </template>
@@ -21,11 +21,9 @@ interface Props {
   imageUrl: string
   name: string
   items?: any
-  onClickAdd?: VoidFunction
+  price: number
+  onSubmit: () => void
 }
 
 defineProps<Props>()
-
-const textDetaills = '30 см, традиционна тесто 30'
-const totalPrice = 90
 </script>

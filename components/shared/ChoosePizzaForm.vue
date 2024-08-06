@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <Button @click="handleOnClick" class="h-[55px] px-10 text-base rounded-[18px] w-full">
+      <Button @click="handleClickAdd" class="h-[55px] px-10 text-base rounded-[18px] w-full">
         Добавить в корзину за {{ totalPrice }} ₽
       </Button>
     </div>
@@ -46,6 +46,7 @@
 import type { Ingredient, ProductItem } from '@prisma/client'
 
 import { AppIngredient, AppTitle, GroupVariants, ProductImage } from '@/components/shared'
+import { useToast } from '@/components/ui/toast/use-toast'
 
 import { mapPizzType, pizzaSizes, pizzaTypes } from '@/constants/pizza'
 import type { PizzaSize, PizzaType } from '@/constants/pizza'
@@ -55,15 +56,16 @@ interface Props {
   name: string
   ingredients: Ingredient[]
   items: ProductItem[]
-  onClickAddCart?: VoidFunction
+  onSubmit: (itemId: number, ingredient: number[]) => void
 }
-
+const { toast } = useToast()
 const props = defineProps<Props>()
 
 const size = ref<PizzaSize>(20)
 const type = ref<PizzaType>(1)
 
 const textDetails = computed(() => `${size.value} см, ${mapPizzType[type.value]} пицца`)
+const currentItemId = computed(() => props.items.find((item) => item.pizzaType === type.value && item.size === size.value)?.id)
 
 const selectedIngredients = ref(new Set<string>([]))
 
@@ -87,8 +89,13 @@ const availablePizzaSizes = computed(() => {
   }))
 })
 
-const handleOnClick = () => {
-  props.onClickAddCart?.()
+const handleClickAdd = () => {
+  if (currentItemId.value) {
+    props.onSubmit(
+      currentItemId.value,
+      Array.from(selectedIngredients.value).map((el) => Number(el))
+    )
+  }
 }
 
 watch(type, () => {

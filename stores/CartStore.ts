@@ -1,5 +1,6 @@
 import { type CartStateItem, getCartDetails } from '@/lib/getCartDetails'
 import { Api } from '@/services/api-client'
+import type { CreateCartItemValues } from '~/services/dto/cart-dto'
 
 export interface CartState {
   loading: Ref<boolean>
@@ -72,18 +73,22 @@ export const CartStore = defineStore('cartStore', (): CartState => {
     }
   }
 
-  const addCartItem = async (values: any) => {
-    // try {
-    //   loading.value = true
-    //   error.value = false
-    //   const data = await Api.cart.addCartItem(values)
-    //   getCartDetails(data)
-    // } catch (err) {
-    //   error.value = true
-    //   console.error(err)
-    // } finally {
-    //   loading.value = false
-    // }
+  const addCartItem = async (values: CreateCartItemValues) => {
+    try {
+      loading.value = true
+      error.value = false
+      const data = await Api.cart.addCartItem(values)
+
+      const { items: dataItems, totalAmount: dataTotalAmount } = getCartDetails(data)
+
+      items.value = dataItems
+      totalAmount.value = dataTotalAmount
+    } catch (err) {
+      error.value = true
+      console.error(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   return {

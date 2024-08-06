@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <Sheet>
+    <Sheet v-model:open="isShow">
       <SheetTrigger><slot /></SheetTrigger>
       <SheetContent class="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
         <SheetHeader>
@@ -45,7 +45,7 @@
                 <div class="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
               </span>
 
-              <span class="font-bold text-lg">0 ₽</span>
+              <span class="font-bold text-lg">{{ totalSum }} ₽</span>
             </div>
 
             <NuxtLink to="">
@@ -73,6 +73,9 @@ import { CartStore } from '@/stores/CartStore'
 const store = CartStore()
 
 const data = computed(() => store.items)
+const totalSum = computed(() => store.items.reduce((acc, item) => (acc += item.price), 0))
+
+const isShow = ref(false)
 
 const onClickCountButton = async (id: number, quantity: number, type: 'plus' | 'minus') => {
   const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
@@ -80,8 +83,10 @@ const onClickCountButton = async (id: number, quantity: number, type: 'plus' | '
   store.updateItemQuantity(id, newQuantity)
 }
 
-onMounted(async () => {
-  await store.fetchCartItems()
+watch(isShow, async (newVal) => {
+  if (newVal) {
+    await store.fetchCartItems()
+  }
 })
 </script>
 
