@@ -3,7 +3,7 @@
     variant="outline"
     :disabled="disabled"
     @click="onClick"
-    class="p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400"
+    class="w-10 p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400"
   >
     <Plus v-if="type === 'plus'" :class="[size === 'sm' ? 'h-4' : 'h-5']" />
 

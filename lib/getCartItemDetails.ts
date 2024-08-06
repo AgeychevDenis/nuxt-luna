@@ -1,12 +1,11 @@
-import type { Ingredient } from '@prisma/client'
-
+import type { CartStateItem } from './getCartDetails'
 import { type PizzaSize, type PizzaType, mapPizzType } from '@/constants/pizza'
 
 export const getCartItemDetails = (
+  ingredients: CartStateItem['ingredients'],
   pizzaType: PizzaType,
-  pizzaSize: PizzaSize,
-  ingredients: Ingredient[]
-): ComputedRef<string> => {
+  pizzaSize: PizzaSize
+): string => {
   const details: string[] = []
   const detailsJoin = computed(() => details.join(', '))
 
@@ -19,5 +18,5 @@ export const getCartItemDetails = (
     details.push(...ingredients.map((ingredient) => ingredient.name))
   }
 
-  return detailsJoin
+  return detailsJoin.value
 }

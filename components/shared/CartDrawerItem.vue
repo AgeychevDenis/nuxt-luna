@@ -8,11 +8,11 @@
       <hr class="my-3" />
 
       <div class="flex items-center justify-between">
-        <CountButton :on-click="() => console.log(2)" :value="quantity" />
+        <CountButton :on-click="onClickCountButton" :value="quantity" />
 
         <div class="flex items-center gap-3">
           <CartItemDetailsPrice :value="price" />
-          <Trash2Icon @click="() => console.log(id)" class="text-gray-400 cursor-pointer hover:text-gray-600" :size="16" />
+          <Trash2Icon @click="onClickRemover" class="text-gray-400 cursor-pointer hover:text-gray-600" :size="16" />
         </div>
       </div>
     </div>
@@ -30,7 +30,12 @@ import {
   type CartItemProps,
 } from '@/components/shared/cart-item-details'
 
-defineProps<CartItemProps>()
+interface Props extends CartItemProps {
+  onClickCountButton: (type: 'plus' | 'minus') => void
+  onClickRemover?: () => void
+}
+
+defineProps<Props>()
 </script>
 
 <style scoped></style>
