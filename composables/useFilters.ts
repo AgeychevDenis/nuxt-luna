@@ -44,7 +44,7 @@ const useFilters = () => {
 
   const price = ref<PriceProps>({
     priceFrom: Number(query.priceFrom) || 0,
-    priceTo: Number(query.priceTo) || 0,
+    priceTo: Number(query.priceTo) || 1000,
   })
 
   const updatePriceFromSlider = (newValues: number[]) => {

@@ -33,18 +33,18 @@ export default defineEventHandler(async (event) => {
           quantity: findCartItem.quantity + 1,
         },
       })
-    }
-
-    await prisma.cartItem.create({
-      data: {
-        cartId: userCart.id,
-        productItemId: data.productItemId,
-        quantity: 1,
-        ingredients: {
-          connect: data.ingredients?.map((id) => ({ id })),
+    } else {
+      await prisma.cartItem.create({
+        data: {
+          cartId: userCart.id,
+          productItemId: data.productItemId,
+          quantity: 1,
+          ingredients: {
+            connect: data.ingredients?.map((id) => ({ id })),
+          },
         },
-      },
-    })
+      })
+    }
 
     const updatedUserCart = await updateCartTotalAmount(token)
 

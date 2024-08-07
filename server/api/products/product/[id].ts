@@ -21,18 +21,16 @@ export default defineEventHandler(async (event) => {
     },
     include: {
       ingredients: true,
-      items: {
-        orderBy: {
-          createdAt: 'desc',
-        },
+      category: {
         include: {
-          product: {
+          products: {
             include: {
               items: true,
             },
           },
         },
       },
+      items: true,
     },
   })
 

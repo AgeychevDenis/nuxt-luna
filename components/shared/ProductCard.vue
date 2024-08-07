@@ -7,7 +7,12 @@
 
       <AppTitle :text="name" size="sm" class="mb-1 mt-3 font-bold" />
 
-      <p class="text-sm text-gray-400">Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус альфредо, чеснок</p>
+      <p class="text-sm text-gray-400">
+        <template v-for="(item, idx) in ingredients" :key="item.id">
+          <span v-if="ingredients.length - 1 !== idx">{{ item.name }},&nbsp;</span>
+          <span v-else>{{ item.name }}</span>
+        </template>
+      </p>
 
       <div class="flex justify-between items-center mt-4">
         <span class="text-[20px]">
@@ -25,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Ingredient } from '@prisma/client'
 import { Plus } from 'lucide-vue-next'
 
 import { AppTitle } from '@/components/shared'
@@ -34,6 +40,7 @@ interface Props {
   name: string
   price: number
   imageUrl: string
+  ingredients: Ingredient[]
 }
 
 const getProductPath = (id: number) => `/product/${id}`

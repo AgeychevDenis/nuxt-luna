@@ -84,7 +84,7 @@ CREATE TABLE "CartItem" (
     "id" SERIAL NOT NULL,
     "productItemId" INTEGER NOT NULL,
     "cartId" INTEGER NOT NULL,
-    "quantity" INTEGER NOT NULL,
+    "quantity" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

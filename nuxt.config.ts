@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**'],
   },
+  css: ['~/assets/css/tailwind.css'],
   shadcn: {
     prefix: '',
     componentDir: './components/ui',

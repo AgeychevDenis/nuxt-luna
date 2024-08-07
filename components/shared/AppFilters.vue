@@ -4,6 +4,19 @@
 
     <!-- Верхние чекбоксы -->
     <CheckboxFiltersGroup
+      name="pizzaTypes"
+      className="mb-5"
+      title="Тип теста"
+      :is-loading="false"
+      :items="[
+        { text: 'Тонкое', value: '1' },
+        { text: 'Традиционное', value: '2' },
+      ]"
+      :on-click-checkbox="(id: string) => useToggleItemsIds(id, pizzaTypesIds)"
+      :selected-ids="pizzaTypesIds"
+    />
+
+    <CheckboxFiltersGroup
       title="Размеры"
       name="sizes"
       class="mb-5"
@@ -15,19 +28,6 @@
       :is-loading="false"
       :on-click-checkbox="(id: string) => useToggleItemsIds(id, sizesIds)"
       :selected-ids="sizesIds"
-    />
-
-    <CheckboxFiltersGroup
-      name="pizzaTypes"
-      className="mb-5"
-      title="Тип теста"
-      :is-loading="false"
-      :items="[
-        { text: 'Тонкое', value: '1' },
-        { text: 'Традиционное', value: '2' },
-      ]"
-      :on-click-checkbox="(id: string) => useToggleItemsIds(id, pizzaTypesIds)"
-      :selected-ids="pizzaTypesIds"
     />
 
     <!-- Фильтр цен -->

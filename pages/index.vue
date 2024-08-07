@@ -23,20 +23,41 @@
       </div>
     </div>
   </AppContainer>
+  <PlusModalPage name="modal" />
 </template>
 
 <script setup lang="ts">
-import type { Category, Product } from '@prisma/client'
+import type { Category } from '@prisma/client'
+import axios from 'axios'
 
 import { AppContainer, AppFilters, AppTitle, ProductsGroupList, TopBar } from '@/components/shared'
 
+import type { GetSearchParams, ProductWithRelation } from '@/@types/prisma'
+
 interface Categories extends Category {
-  products: Product[]
+  products: ProductWithRelation[]
 }
 
-const { data } = await useFetch<Categories[]>('/api/categories')
+const route = useRoute()
+const data = ref<Categories[]>([])
 
-const categoriesTopBar = computed(() => data.value?.filter((category) => category.products.length > 0) || [])
+const categoriesTopBar = computed(() => data.value.filter((category) => category.products.length > 0) || [])
+const hasUrlParameters = computed(() => route.fullPath.includes('?'))
+
+if (!hasUrlParameters.value) {
+  data.value = (await useFetch<Categories[]>('/api/categories/')).data.value || []
+}
+
+const fetchCategories = async (query: GetSearchParams) => {
+  const { data: dataServer } = await axios.get<Categories[]>('/api/categories/', {
+    params: query,
+  })
+  data.value = dataServer
+}
+
+watch(hasUrlParameters, () => {
+  fetchCategories(route.query)
+})
 </script>
 
 <style scoped></style>

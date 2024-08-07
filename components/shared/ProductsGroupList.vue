@@ -10,6 +10,7 @@
         :name="product.name"
         :image-url="product.imageUrl"
         :price="product.items[0].price"
+        :ingredients="product.ingredients"
       />
     </div>
   </div>
@@ -18,11 +19,12 @@
 <script setup lang="ts">
 import { AppTitle, ProductCard } from '@/components/shared'
 
+import type { ProductWithRelation } from '@/@types/prisma'
 import { useCategoryStore } from '@/stores/CategoryStore'
 
 interface Props {
   title: string
-  items: any[]
+  items: ProductWithRelation[]
   categoryId: number
   listClassName?: string
 }

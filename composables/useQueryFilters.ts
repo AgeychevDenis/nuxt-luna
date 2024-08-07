@@ -18,11 +18,15 @@ export const useQueryFilters = (filters: Filters) => {
   watch(
     [filters.price, filters.pizzaTypesIds, filters.sizesIds.value, filters.ingredientsIds],
     () => {
-      const params = {
-        ...filters.price.value,
+      const params: any = {
         pizzaTypes: Array.from(filters.pizzaTypesIds.value),
         sizes: Array.from(filters.sizesIds.value),
         ingredients: Array.from(filters.ingredientsIds.value),
+      }
+
+      if (filters.price.value.priceFrom !== 0 || filters.price.value.priceTo !== 1000) {
+        params.priceFrom = filters.price.value.priceFrom
+        params.priceTo = filters.price.value.priceTo
       }
 
       const query = qs.stringify(params, {
