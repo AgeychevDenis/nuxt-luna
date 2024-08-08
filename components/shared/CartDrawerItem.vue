@@ -1,5 +1,5 @@
 <template>
-  <div class="flex bg-white p-5 gap-6">
+  <div class="flex bg-white p-5 gap-6" :class="{ 'opacity-50 pointer-events-none': disabled }">
     <CartItemDetailsImage :src="imageUrl" />
 
     <div class="flex-1">
@@ -12,7 +12,7 @@
 
         <div class="flex items-center gap-3">
           <CartItemDetailsPrice :value="price" />
-          <Trash2Icon @click="onClickRemover" class="text-gray-400 cursor-pointer hover:text-gray-600" :size="16" />
+          <Trash2Icon @click="onClickRemove" class="text-gray-400 cursor-pointer hover:text-gray-600" :size="16" />
         </div>
       </div>
     </div>
@@ -32,7 +32,8 @@ import {
 
 interface Props extends CartItemProps {
   onClickCountButton: (type: 'plus' | 'minus') => void
-  onClickRemover?: () => void
+  onClickRemove?: () => void
+  disabled: boolean
 }
 
 defineProps<Props>()

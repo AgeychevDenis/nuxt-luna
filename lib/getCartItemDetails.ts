@@ -3,8 +3,8 @@ import { type PizzaSize, type PizzaType, mapPizzType } from '@/constants/pizza'
 
 export const getCartItemDetails = (
   ingredients: CartStateItem['ingredients'],
-  pizzaType: PizzaType,
-  pizzaSize: PizzaSize
+  pizzaType?: PizzaType,
+  pizzaSize?: PizzaSize
 ): string => {
   const details: string[] = []
   const detailsJoin = computed(() => details.join(', '))

@@ -1,5 +1,5 @@
 <template>
-  <header class="border border-b">
+  <header class="border-b">
     <AppContainer class="flex items-center justify-between py-8">
       <NuxtLink to="/" class="flex items-center gap-4">
         <img src="/logo.png" width="35px" height="35px" alt="logo" />
@@ -9,7 +9,7 @@
         </div>
       </NuxtLink>
 
-      <div class="mx-10 flex-1">
+      <div v-if="hasSearch" class="mx-10 flex-1">
         <SearchInput />
       </div>
 
@@ -19,7 +19,7 @@
           Войти
         </Button>
 
-        <div>
+        <div v-if="hasCart">
           <CartButton />
         </div>
       </div>
@@ -31,6 +31,16 @@
 import { User } from 'lucide-vue-next'
 
 import { AppContainer, CartButton, SearchInput } from '@/components/shared'
+
+interface Props {
+  hasSearch?: boolean
+  hasCart?: boolean
+}
+
+withDefaults(defineProps<Props>(), {
+  hasSearch: true,
+  hasCart: true,
+})
 </script>
 
 <style scoped></style>

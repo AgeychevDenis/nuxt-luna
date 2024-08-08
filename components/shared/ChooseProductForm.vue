@@ -7,7 +7,12 @@
     <div class="w-[490px] bg-[#f7f6f5] p-7 flex flex-col justify-between">
       <AppTitle :text="name" size="md" class="font-extrabold mb-1" />
 
-      <Button @click="() => onSubmit?.()" :loading="loading" class="h-[55px] px-10 text-base rounded-[18px] w-full">
+      <Button
+        @click="() => onSubmit?.()"
+        :loading="loading"
+        :disabled="loading"
+        class="h-[55px] px-10 text-base rounded-[18px] w-full"
+      >
         Добавить в корзину за {{ price }} ₽
       </Button>
     </div>
