@@ -28,9 +28,11 @@
 </template>
 
 <script setup lang="ts">
+import { useUrlSearchParams } from '@vueuse/core'
 import { User } from 'lucide-vue-next'
 
 import { AppContainer, CartButton, SearchInput } from '@/components/shared'
+import { useToast } from '@/components/ui/toast/use-toast'
 
 interface Props {
   hasSearch?: boolean
@@ -40,6 +42,19 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   hasSearch: true,
   hasCart: true,
+})
+
+const params = useUrlSearchParams()
+
+const { toast } = useToast()
+
+onMounted(() => {
+  if (params.paid === 'success') {
+    toast({
+      description: 'Заказ успешно оплачен! Информация отправлена на почту.',
+      variant: 'success',
+    })
+  }
 })
 </script>
 

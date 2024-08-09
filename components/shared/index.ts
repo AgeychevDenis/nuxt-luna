@@ -30,5 +30,7 @@ export { default as CheckoutCart } from './checkout/CheckoutCart.vue'
 export { default as CheckoutPersonalForm } from './checkout/CheckoutPersonalForm.vue'
 export { default as CheckoutAddressForm } from './checkout/CheckoutAddressForm.vue'
 export { default as FormInput } from './form/FormInput.vue'
+export { default as FormTextarea } from './form/FormTextarea.vue'
+export { default as FromAddressInput } from './form/FromAddressInput.vue'
 
 export * from './modals/index'

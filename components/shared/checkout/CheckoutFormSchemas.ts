@@ -25,5 +25,11 @@ export const checkoutFormSchema = toTypedSchema(
         required_error: requiredMessage('Телефон'),
       })
       .min(10, { message: 'Введите корректный номер телефона' }),
+    address: z.string({
+      required_error: requiredMessage('Адрес'),
+    }),
+    comment: z.string().optional(),
   })
 )
+
+export type IsFieldDirtyValue = 'address' | 'comment' | 'firstName' | 'lastName' | 'email' | 'phone'

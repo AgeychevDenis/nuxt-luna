@@ -6,7 +6,7 @@
         <span v-if="required" class="text-red-500">*</span>
       </FormLabel>
       <FormControl>
-        <Input type="text" :placeholder="placeholder" v-bind="componentField" />
+        <Textarea type="text" :rows="rows" :placeholder="placeholder" v-bind="componentField" />
       </FormControl>
       <FormMessage :unsaved="isFieldDirty" />
     </FormItem>
@@ -25,6 +25,7 @@ interface Props {
   required?: boolean
   placeholder: string
   isFieldDirty: (value: IsFieldDirtyValue) => void
+  rows?: number
 }
 
 defineProps<Props>()

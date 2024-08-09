@@ -1,15 +1,22 @@
 <template>
   <WhiteBlock title="3. Адрес доставки">
     <div class="flex flex-col gap-5">
-      <Input name="firstName" class="text-base" placeholder="Введите адрес" />
+      <FromAddressInput :isFieldDirty="isFieldDirty" name="address" />
 
-      <Textarea :rows="5" class="text-base" placeholder="Комментарий" />
+      <FormTextarea :isFieldDirty="isFieldDirty" name="comment" :rows="5" class="text-base" placeholder="Комментарий" />
     </div>
   </WhiteBlock>
 </template>
 
 <script setup lang="ts">
-import { WhiteBlock } from '@/components/shared'
+import { FormTextarea, FromAddressInput, WhiteBlock } from '@/components/shared'
+import type { IsFieldDirtyValue } from '@/components/shared/checkout/CheckoutFormSchemas'
+
+interface Props {
+  isFieldDirty: (value: IsFieldDirtyValue) => void
+}
+
+defineProps<Props>()
 </script>
 
 <style scoped></style>

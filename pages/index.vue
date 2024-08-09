@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import type { Category } from '@prisma/client'
+import { useDebounceFn } from '@vueuse/core'
 import axios from 'axios'
 
 import { AppContainer, AppFilters, AppTitle, ProductsGroupList, TopBar } from '@/components/shared'
@@ -41,23 +42,35 @@ interface Categories extends Category {
 const route = useRoute()
 const data = ref<Categories[]>([])
 
-const categoriesTopBar = computed(() => data.value.filter((category) => category.products.length > 0) || [])
-const hasUrlParameters = computed(() => route.fullPath.includes('?'))
+const params = computed(() => ({
+  sizesIds: useFilters().sizesIds,
+  pizzaTypesIds: useFilters().pizzaTypesIds,
+  ingredientsIds: useFilters().ingredientsIds,
+  price: useFilters().price,
+}))
 
-if (!hasUrlParameters.value) {
-  data.value = (await useFetch<Categories[]>('/api/categories/')).data.value || []
-}
+const categoriesTopBar = computed(() => data.value.filter((category) => category.products.length > 0))
+
+const hasUrlParameters = computed(() => route.fullPath === '/')
 
 const fetchCategories = async (query: GetSearchParams) => {
-  const { data: dataServer } = await axios.get<Categories[]>('/api/categories/', {
-    params: query,
-  })
-  data.value = dataServer
+  try {
+    const { data: dataServer } = await axios.get<Categories[]>('/api/categories/', { params: query })
+    data.value = dataServer
+  } catch (error) {
+    console.error('Error fetching categories:', error)
+  }
 }
 
-watch(hasUrlParameters, () => {
-  fetchCategories(route.query)
+const debouncedFetchCategories = useDebounceFn(() => {
+  fetchCategories(route.query as GetSearchParams)
+}, 300)
+
+watch(params, () => {
+  debouncedFetchCategories()
 })
+
+data.value = (await useFetch<Categories[]>('/api/categories/')).data.value || []
 </script>
 
 <style scoped></style>

@@ -12,9 +12,10 @@
 <script setup lang="ts">
 import { WhiteBlock } from '@/components/shared'
 import { FormInput } from '@/components/shared'
+import type { IsFieldDirtyValue } from '@/components/shared/checkout/CheckoutFormSchemas'
 
 interface Props {
-  isFieldDirty: any
+  isFieldDirty: (value: IsFieldDirtyValue) => void
 }
 
 defineProps<Props>()

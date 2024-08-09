@@ -54,6 +54,8 @@ const { toast } = useToast()
 
 const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
   try {
+    modalRouter.close()
+
     const itemId = productItemId ?? firstItem.id
 
     await store.addCartItem({
@@ -65,7 +67,6 @@ const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
       description: `${props.product.name} добавлена в корзину`,
       variant: 'success',
     })
-    modalRouter.close()
   } catch (error) {
     toast({
       title: 'Ошибка',

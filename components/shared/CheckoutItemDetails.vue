@@ -5,16 +5,10 @@
       <div class="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
     </span>
 
-    <span class="font-bold text-lg">{{ value }} ₽</span>
+    <slot name="price"></slot>
   </div>
 </template>
 
-<script setup lang="ts">
-interface Props {
-  value: number
-}
-
-defineProps<Props>()
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

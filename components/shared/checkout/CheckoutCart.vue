@@ -1,7 +1,9 @@
 <template>
   <WhiteBlock title="1. Корзина">
     <div class="flex flex-col gap-5">
-      <div v-for="item in data" :key="item.id">
+      <CheckoutItemSkeleton v-if="store.loading" v-for="i in 4" :key="i" class="w-full h-11" />
+
+      <div v-else v-for="item in data" :key="item.id">
         <CheckoutItem
           :id="item.id"
           :image-url="item.imageUrl"
@@ -19,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { CheckoutItem, WhiteBlock } from '@/components/shared'
+import { CheckoutItem, CheckoutItemSkeleton, WhiteBlock } from '@/components/shared'
 
 import type { PizzaSize, PizzaType } from '@/constants/pizza'
 import type { CartStateItem } from '@/lib/getCartDetails'
