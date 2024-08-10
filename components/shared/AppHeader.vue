@@ -14,11 +14,9 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <Button variant="outline" class="flex items-center gap-1">
-          <User :size="16" />
-          Войти
-        </Button>
+        <AuthModal :open="openAuthModal" :on-close="() => (openAuthModal = false)" />
 
+        <ProfileButton :on-click-sign-in="() => (openAuthModal = true)" />
         <div v-if="hasCart">
           <CartButton />
         </div>
@@ -29,9 +27,8 @@
 
 <script setup lang="ts">
 import { useUrlSearchParams } from '@vueuse/core'
-import { User } from 'lucide-vue-next'
 
-import { AppContainer, CartButton, SearchInput } from '@/components/shared'
+import { AppContainer, AuthModal, CartButton, ProfileButton, SearchInput } from '@/components/shared'
 import { useToast } from '@/components/ui/toast/use-toast'
 
 interface Props {
@@ -45,6 +42,7 @@ withDefaults(defineProps<Props>(), {
 })
 
 const params = useUrlSearchParams()
+const openAuthModal = ref(false)
 
 const { toast } = useToast()
 

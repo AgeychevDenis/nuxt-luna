@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@prisma/nuxt',
     'nuxt-pages-plus',
+    '@sidebase/nuxt-auth',
   ],
   pinia: {
     storesDirs: ['./stores/**'],
@@ -22,6 +23,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: process.env.API_URL,
+    },
+  },
+  auth: {
+    provider: {
+      type: 'authjs',
+      trustHost: false,
+      defaultProvider: 'github',
+      addDefaultCallbackUrl: true,
     },
   },
 })
