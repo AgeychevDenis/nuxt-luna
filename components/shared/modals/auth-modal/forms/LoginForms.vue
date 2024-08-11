@@ -10,7 +10,7 @@
     <FormInput class="mb-3" name="email" label="E-Mail" required :isFieldDirty="isFieldDirty" />
     <FormInput class="mb-5" type="password" name="password" label="Пароль" required :isFieldDirty="isFieldDirty" />
 
-    <Button :loading="isSubmitting" :disabled="isSubmitting" class="h-12 text-base" type="submit">{{ textForm }}</Button>
+    <Button :loading="isSubmitting" :disabled="isSubmitting" class="w-full h-12 text-base" type="submit">{{ textForm }}</Button>
   </form>
 </template>
 
@@ -30,7 +30,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { toast } = useToast()
-const { signIn, getSession } = useAuth()
+const { signIn } = useAuth()
 
 const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formLoginSchema,
@@ -49,7 +49,7 @@ const onSubmit = handleSubmit(async (value) => {
       redirect: false,
     })
 
-    if (!resp?.ok) {
+    if (!resp?.ok || resp?.error) {
       throw Error()
     }
 

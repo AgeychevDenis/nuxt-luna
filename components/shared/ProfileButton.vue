@@ -10,7 +10,7 @@
       Войти
     </Button>
 
-    <NuxtLink v-else to="">
+    <NuxtLink v-else to="/profile">
       <Button variant="secondary" class="flex items-center gap-2">
         <CircleUser :size="18" />
         Профиль

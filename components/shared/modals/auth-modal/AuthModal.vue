@@ -52,10 +52,10 @@ const props = defineProps<Props>()
 const { signIn } = useAuth()
 
 const type = ref<'login' | 'register'>('login')
-const textLogin = computed(() => (type.value === 'login' ? 'Войти' : 'Регистрация'))
+const textLogin = computed(() => (type.value === 'login' ? 'Регистрация' : 'Войти'))
 
 const onSwitchType = () => {
-  type.value === 'login' ? 'register' : 'login'
+  type.value = type.value === 'login' ? 'register' : 'login'
 }
 
 const handleClose = () => {
