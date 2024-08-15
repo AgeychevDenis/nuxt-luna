@@ -53,6 +53,13 @@ onMounted(() => {
       variant: 'success',
     })
   }
+
+  if (params.verified === 'success') {
+    toast({
+      description: 'Почта успешно подтверждена!',
+      variant: 'success',
+    })
+  }
 })
 </script>
 

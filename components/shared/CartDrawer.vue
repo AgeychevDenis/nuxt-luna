@@ -3,6 +3,10 @@
     <Sheet v-model:open="isShow">
       <SheetTrigger><slot /></SheetTrigger>
       <SheetContent class="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
+        <DialogTitle class="hidden"></DialogTitle>
+
+        <DialogDescription class="hidden"></DialogDescription>
+
         <div class="flex flex-col h-full" :class="{ 'justify-center': !totalSum }">
           <template v-if="totalSum > 0">
             <SheetHeader>

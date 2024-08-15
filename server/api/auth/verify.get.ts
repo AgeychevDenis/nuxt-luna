@@ -33,5 +33,5 @@ export default defineEventHandler(async (event) => {
     },
   })
 
-  await sendRedirect(event, '/?verified', 301)
+  await sendRedirect(event, '/?verified=success', 301)
 })

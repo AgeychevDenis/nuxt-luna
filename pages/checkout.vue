@@ -41,6 +41,9 @@ definePageMeta({
 
 const store = CartStore()
 const { toast } = useToast()
+const { getSession } = useAuth()
+
+const session = await getSession()
 
 const isShow = ref(false)
 const submitting = ref(false)
@@ -49,6 +52,10 @@ const { data, totalSum, onClickCountButton } = useCart(isShow)
 
 const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: checkoutFormSchema,
+  initialValues: {
+    firstName: session?.user?.name?.split(' ')[0] || '',
+    lastName: session?.user?.name?.split(' ')[1] || '',
+  },
 })
 
 const onSubmit = handleSubmit(async (values) => {
@@ -77,8 +84,10 @@ const onSubmit = handleSubmit(async (values) => {
   }
 })
 
-onMounted(() => {
+onMounted(async () => {
   isShow.value = true
+
+  //   const { data } = await axios.get('/api/auth/me', { params: session.user })
 })
 </script>
 
