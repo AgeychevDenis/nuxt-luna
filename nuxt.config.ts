@@ -2,6 +2,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  nitro: {
+    prerender: {
+      routes: ['/', '/auth/callback'],
+    },
+  },
+  ssr: true,
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
@@ -23,6 +29,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: process.env.API_URL,
+      origin: process.env.NUXT_PUBLIC_ORIGIN || 'https://nuxt-pizza.vercel.app/'
     },
   },
   auth: {
