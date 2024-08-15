@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   nitro: {
     prerender: {
-      routes: ['/', '/auth/callback'],
+      routes: ['/'],
     },
   },
   ssr: true,
@@ -31,6 +31,7 @@ export default defineNuxtConfig({
       apiBase: process.env.API_URL,
       origin: process.env.NUXT_PUBLIC_ORIGIN || 'https://nuxt-pizza.vercel.app/'
     },
+    authOrigin: 'https://nuxt-pizza.vercel.app/'
   },
   auth: {
     provider: {
