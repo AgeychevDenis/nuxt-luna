@@ -1,6 +1,6 @@
 import { createPayment } from '@/lib/createPayment'
 import { sendEmail } from '@/lib/sendEmail'
-import prisma from '~/lib/prisma'
+import prisma from '~/server/lib/prisma'
 
 export default defineEventHandler(async (event) => {
   try {

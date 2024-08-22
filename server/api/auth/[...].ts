@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 
-import prisma from '~/lib/prisma'
+import prisma from '~/server/lib/prisma'
 
 interface Profile {
   id: string

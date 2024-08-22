@@ -1,5 +1,5 @@
 import { calcCartItemTotalPrice } from '../../lib/calcCartItemTotalPrice'
-import prisma from '~/lib/prisma'
+import prisma from '~/server/lib/prisma'
 import type { CartItemDTO } from '~/services/dto/cart-dto'
 
 export const updateCartTotalAmount = async (token: string) => {

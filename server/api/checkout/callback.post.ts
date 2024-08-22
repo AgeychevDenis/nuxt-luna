@@ -1,5 +1,5 @@
 import { PaymentCallbackData } from '~/@types/yookassa'
-import prisma from '~/lib/prisma'
+import prisma from '~/server/lib/prisma'
 import { sendEmail } from '~/lib/sendEmail'
 import { CartItemDTO } from '~/services/dto/cart-dto'
 

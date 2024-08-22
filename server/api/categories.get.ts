@@ -1,5 +1,5 @@
 import type { GetSearchParams } from '@/@types/prisma'
-import prisma from '~/lib/prisma'
+import prisma from '~/server/lib/prisma'
 
 const DEFAULT_MIN_PRICE = 0
 const DEFAULT_MAX_PRICE = 1000

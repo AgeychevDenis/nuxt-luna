@@ -1,4 +1,4 @@
-import prisma from '~/lib/prisma'
+import prisma from '~/server/lib/prisma'
 import { updateCartTotalAmount } from '@/server/lib/updateCartTotalAmount'
 
 export default defineEventHandler(async (event) => {

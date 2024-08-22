@@ -1,6 +1,6 @@
 import { H3Error, sendError } from 'h3'
 
-import prisma from '~/lib/prisma'
+import prisma from '~/server/lib/prisma'
 
 export default defineEventHandler(async (event) => {
   const id = Number(event?.context?.params?.id)

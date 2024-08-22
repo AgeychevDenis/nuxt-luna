@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 
-import prisma from '@/lib/prisma'
+import prisma from '~/server/lib/prisma'
 import { CreateCartItemValues } from '@/services/dto/cart-dto'
 import { updateCartTotalAmount } from '@/server/lib/updateCartTotalAmount'
 
