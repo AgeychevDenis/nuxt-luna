@@ -1,4 +1,4 @@
-import { calcCartItemTotalPrice } from './calcCartItemTotalPrice'
+import { calcCartItemTotalPrice } from '../../lib/calcCartItemTotalPrice'
 import prisma from '~/lib/prisma'
 import type { CartItemDTO } from '~/services/dto/cart-dto'
 

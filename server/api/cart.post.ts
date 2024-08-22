@@ -1,9 +1,26 @@
 import crypto from 'crypto'
 
-import { findOrCreateCart } from '@/lib/findOrCreateCart'
 import prisma from '@/lib/prisma'
 import { CreateCartItemValues } from '@/services/dto/cart-dto'
-import { updateCartTotalAmount } from '~/lib/updateCartTotalAmount'
+import { updateCartTotalAmount } from '@/server/lib/updateCartTotalAmount'
+
+const findOrCreateCart = async (token: string) => {
+  let userCart = await prisma.cart.findFirst({
+    where: {
+      token,
+    },
+  })
+
+  if (!userCart) {
+    userCart = await prisma.cart.create({
+      data: {
+        token,
+      },
+    })
+  }
+
+  return userCart
+}
 
 export default defineEventHandler(async (event) => {
   try {
