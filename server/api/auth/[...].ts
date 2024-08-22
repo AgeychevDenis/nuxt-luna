@@ -1,5 +1,4 @@
 import { NuxtAuthHandler } from '#auth'
-import { $Enums } from '@prisma/client'
 import { compare, hashSync } from 'bcrypt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
@@ -12,7 +11,7 @@ interface Profile {
   name: string
   email: string
   image: string
-  role: $Enums.UserRole
+  role: 'USER' | 'ADMIN'
   avatar_url: string
   login: string
 }
@@ -38,7 +37,7 @@ export default NuxtAuthHandler({
           name: profile.name || profile.login,
           email: profile.email,
           image: profile.avatar_url,
-          role: 'USER' as $Enums.UserRole,
+          role: 'USER',
         }
       },
     }),

@@ -1,5 +1,3 @@
-import { $Enums } from '@prisma/client'
-
 import { PaymentCallbackData } from '~/@types/yookassa'
 import prisma from '~/lib/prisma'
 import { sendEmail } from '~/lib/sendEmail'
@@ -26,7 +24,7 @@ export default defineEventHandler(async (event) => {
         id: order.id,
       },
       data: {
-        status: isSucceeded ? $Enums.OrderStatus.SUCCEEDED : $Enums.OrderStatus.CANCELLED,
+        status: isSucceeded ? 'SUCCEEDED' : 'CANCELLED',
       },
     })
 

@@ -1,5 +1,3 @@
-import { $Enums } from '@prisma/client'
-
 import { createPayment } from '@/lib/createPayment'
 import { sendEmail } from '@/lib/sendEmail'
 import prisma from '~/lib/prisma'
@@ -54,7 +52,7 @@ export default defineEventHandler(async (event) => {
         address: data.address,
         totalAmount: userCart.totalAmount,
         comment: data.comment,
-        status: $Enums.OrderStatus.PENDING,
+        status: 'PENDING',
         items: userCart.items,
       },
     })
