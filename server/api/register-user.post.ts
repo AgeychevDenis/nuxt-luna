@@ -1,7 +1,7 @@
 import { hashSync } from 'bcrypt'
 
-import prisma from '~/server/lib/prisma'
 import { sendEmail } from '~/lib/sendEmail'
+import prisma from '~/server/lib/prisma'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
 
     const html = `
     <p>Код подтверждения: <h2>${code}</h2></p>
-    <p><a href="http://192.168.0.18:3000/api/auth/verify?code=${code}">Подтвердить регистрацию</a></p>
+    <p><a href="https://nuxt-pizza.vercel.app/api/auth/verify?code=${code}">Подтвердить регистрацию</a></p>
     `
 
     await sendEmail(createdUser.email, 'Nuxt Pizza / Подтверждение регистрации', html)
