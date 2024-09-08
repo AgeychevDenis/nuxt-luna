@@ -14,7 +14,6 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@vueuse/nuxt',
     '@pinia/nuxt',
-    '@prisma/nuxt',
     'nuxt-pages-plus',
     '@sidebase/nuxt-auth',
   ],
@@ -45,5 +44,5 @@ export default defineNuxtConfig({
     optimizeDeps: {
       exclude: ['@prisma/client'],
     },
-  }
+  },
 })
