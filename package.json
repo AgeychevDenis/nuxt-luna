@@ -40,7 +40,6 @@
     "nuxt": "^3.12.4",
     "nuxt-pages-plus": "^0.3.0-beta.0",
     "pinia": "^2.2.0",
-    "prisma": "^5.17.0",
     "prisma-extension-pagination": "^0.7.4",
     "qs": "^6.13.0",
     "radix-vue": "^1.9.2",
