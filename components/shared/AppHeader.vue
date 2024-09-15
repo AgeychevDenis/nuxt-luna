@@ -2,10 +2,13 @@
   <header class="border-b">
     <AppContainer class="flex items-center justify-between py-8">
       <NuxtLink to="/" class="flex items-center gap-4">
-        <img src="/logo.png" width="35px" height="35px" alt="logo" />
         <div>
-          <h1 class="text-2xl uppercase font-black">Nuxt Pizza</h1>
-          <p class="text-sm text-gray-400 leading-3">вкусней уже некуда</p>
+          <img src="/logo.svg" alt="logo" class="w-40 mb-3" />
+          <p class="text-sm text-gray-400 leading-3">
+            совершенно всё для
+            <br />
+            твоей красоты
+          </p>
         </div>
       </NuxtLink>
 

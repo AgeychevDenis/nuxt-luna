@@ -2,7 +2,7 @@ import type { GetSearchParams } from '@/@types/prisma'
 import prisma from '~/server/lib/prisma'
 
 const DEFAULT_MIN_PRICE = 0
-const DEFAULT_MAX_PRICE = 1000
+const DEFAULT_MAX_PRICE = 50000
 
 export default defineEventHandler(async (event) => {
   const params = getQuery(event) as GetSearchParams

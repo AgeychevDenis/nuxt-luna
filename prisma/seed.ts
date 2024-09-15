@@ -7,10 +7,20 @@ const randomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10
 }
 
-const generateProductItem = ({ productId, pizzaType, size }: { productId: number; pizzaType?: number; size?: number }) => {
+const generateProductItem = ({
+  productId,
+  pizzaType,
+  size,
+  price,
+}: {
+  productId: number
+  pizzaType?: number
+  size?: number
+  price?: number
+}) => {
   return {
     productId,
-    price: randomNumber(190, 600),
+    price: price || randomNumber(500, 3000),
     pizzaType,
     size,
   } as Prisma.ProductItemUncheckedCreateInput
@@ -50,61 +60,61 @@ async function up() {
     data: products,
   })
 
-  const pizza1 = await prisma.product.create({
+  const perfume1 = await prisma.product.create({
     data: {
-      name: 'Пепперони фреш',
-      imageUrl: 'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
+      name: 'TRUSSARDI My Land',
+      imageUrl: 'https://i.ibb.co/dtRFNjp/EX-dd4e9433-9eae-47a4-b0f2-c0cbd1a0fd9a-Photoroom.png',
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(0, 5),
+        connect: ingredients,
       },
     },
   })
 
-  const pizza2 = await prisma.product.create({
+  const perfume2 = await prisma.product.create({
     data: {
-      name: 'Сырная',
-      imageUrl: 'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
+      name: 'TOM FORD Tobacco Vanille',
+      imageUrl: 'https://i.ibb.co/BjbVYbv/EX-f61956ce-e9be-4cb9-b13c-f8677eacd23f-Photoroom.png',
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(5, 10),
+        connect: ingredients,
       },
     },
   })
 
-  const pizza3 = await prisma.product.create({
+  const perfume3 = await prisma.product.create({
     data: {
-      name: 'Чоризо фреш',
-      imageUrl: 'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
+      name: 'TRUSSARDI Delicate Rose',
+      imageUrl: 'https://i.ibb.co/sRJd4TL/EX-870724ec-dc76-4274-8a99-adcc962cdb32-Photoroom.png',
       categoryId: 1,
       ingredients: {
-        connect: ingredients.slice(10, 40),
+        connect: ingredients,
       },
     },
   })
 
   await prisma.productItem.createMany({
     data: [
-      // Пицца "Пепперони фреш"
-      generateProductItem({ productId: pizza1.id, pizzaType: 1, size: 20 }),
-      generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 40 }),
+      // Парфюмерия TRUSSARDI My Land
+      generateProductItem({ productId: perfume1.id, pizzaType: 1, size: 20, price: 5279 }),
+      generateProductItem({ productId: perfume1.id, pizzaType: 2, size: 30, price: 7959 }),
+      generateProductItem({ productId: perfume1.id, pizzaType: 2, size: 40, price: 8481 }),
 
-      // Пицца "Сырная"
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 20 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 30 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 40 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 20 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 40 }),
+      // Парфюмерия TOM FORD Tobacco Vanille
+      generateProductItem({ productId: perfume2.id, pizzaType: 1, size: 20, price: 17010 }),
+      generateProductItem({ productId: perfume2.id, pizzaType: 1, size: 30, price: 26100 }),
+      generateProductItem({ productId: perfume2.id, pizzaType: 1, size: 40, price: 35055 }),
+      generateProductItem({ productId: perfume2.id, pizzaType: 2, size: 20, price: 10990 }),
+      generateProductItem({ productId: perfume2.id, pizzaType: 2, size: 30, price: 15550 }),
+      generateProductItem({ productId: perfume2.id, pizzaType: 2, size: 40, price: 28970 }),
 
-      // Пицца "Чоризо фреш"
-      generateProductItem({ productId: pizza3.id, pizzaType: 1, size: 20 }),
-      generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 40 }),
+      // Парфюмерия TRUSSARDI Delicate Rose
+      generateProductItem({ productId: perfume3.id, pizzaType: 1, size: 20, price: 5599 }),
+      generateProductItem({ productId: perfume3.id, pizzaType: 2, size: 30, price: 7999 }),
+      generateProductItem({ productId: perfume3.id, pizzaType: 2, size: 40, price: 10639 }),
 
       // Остальные продукты
-      generateProductItem({ productId: 1 }),
+      generateProductItem({ productId: 1, price: 1205 }),
       generateProductItem({ productId: 2 }),
       generateProductItem({ productId: 3 }),
       generateProductItem({ productId: 4 }),

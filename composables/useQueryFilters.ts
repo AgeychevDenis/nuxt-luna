@@ -24,7 +24,7 @@ export const useQueryFilters = (filters: Filters) => {
         ingredients: Array.from(filters.ingredientsIds.value),
       }
 
-      if (filters.price.value.priceFrom !== 0 || filters.price.value.priceTo !== 1000) {
+      if (filters.price.value.priceFrom !== 0 || filters.price.value.priceTo !== 50000) {
         params.priceFrom = filters.price.value.priceFrom
         params.priceTo = filters.price.value.priceTo
       }

@@ -6,24 +6,24 @@
     <CheckboxFiltersGroup
       name="pizzaTypes"
       className="mb-5"
-      title="Тип теста"
+      title="Пол"
       :is-loading="false"
       :items="[
-        { text: 'Тонкое', value: '1' },
-        { text: 'Традиционное', value: '2' },
+        { text: 'Женский', value: '1' },
+        { text: 'Мужской', value: '2' },
       ]"
       :on-click-checkbox="(id: string) => useToggleItemsIds(id, pizzaTypesIds)"
       :selected-ids="pizzaTypesIds"
     />
 
     <CheckboxFiltersGroup
-      title="Размеры"
+      title="Доступные объемы"
       name="sizes"
       class="mb-5"
       :items="[
-        { text: '20 см', value: '20' },
-        { text: '30 см', value: '30' },
-        { text: '40 см', value: '40' },
+        { text: '30 мг', value: '20' },
+        { text: '50 мг', value: '30' },
+        { text: '100 мг', value: '40' },
       ]"
       :is-loading="false"
       :on-click-checkbox="(id: string) => useToggleItemsIds(id, sizesIds)"
@@ -34,23 +34,11 @@
     <div class="mt-10 pb-7">
       <p class="font-bold mb-3">Цена от и до:</p>
       <div class="flex gap-3 mb-5">
-        <Input type="number" placeholder="0" min="0" max="1000" v-model.number="price.priceFrom" />
-        <Input type="number" placeholder="1000" min="100" max="1000" v-model.number="price.priceTo" />
+        <Input type="number" placeholder="0" min="0" max="50000" v-model.number="price.priceFrom" />
+        <Input type="number" placeholder="50000" min="100" max="50000" v-model.number="price.priceTo" />
       </div>
 
-      <RangeSlider :min="0" :max="1000" v-model="price" :step="10" @value-change="updatePriceFromSlider" />
-
-      <CheckboxFiltersGroup
-        title="Ингредиенты"
-        name="ingredients"
-        :limit="6"
-        :items="items"
-        :default-items="items"
-        :is-loading="isLoading"
-        class="mt-5"
-        :on-click-checkbox="(id: string) => useToggleItemsIds(id, ingredientsIds)"
-        :selected-ids="ingredientsIds"
-      />
+      <RangeSlider :min="0" :max="50000" v-model="price" :step="10" @value-change="updatePriceFromSlider" />
     </div>
   </div>
 </template>
@@ -78,7 +66,7 @@ watch(
     }
 
     if (!newVal.priceTo) {
-      price.value.priceTo = 1000
+      price.value.priceTo = 50000
     }
   },
   { deep: true }

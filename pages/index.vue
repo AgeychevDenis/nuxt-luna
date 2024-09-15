@@ -1,6 +1,6 @@
 <template>
   <AppContainer class="mt-10">
-    <AppTitle text="Все пиццы" size="lg" class="font-extrabold" />
+    <AppTitle text="Популярные категории" size="lg" class="font-extrabold" />
   </AppContainer>
   <TopBar :categories="categoriesTopBar" />
 
@@ -50,8 +50,6 @@ const params = computed(() => ({
 }))
 
 const categoriesTopBar = computed(() => data.value.filter((category) => category.products.length > 0))
-
-const hasUrlParameters = computed(() => route.fullPath === '/')
 
 const fetchCategories = async (query: GetSearchParams) => {
   try {

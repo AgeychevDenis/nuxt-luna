@@ -1,8 +1,10 @@
 <template>
-  <h2 class="font-bold">{{ value }} ₽</h2>
+  <h2 class="font-bold">{{ currency(value) }} ₽</h2>
 </template>
 
 <script setup lang="ts">
+import { currency } from '@/helpers'
+
 interface Props {
   value: number
 }

@@ -7,17 +7,10 @@
 
       <AppTitle :text="name" size="sm" class="mb-1 mt-3 font-bold" />
 
-      <p class="text-sm text-gray-400">
-        <template v-for="(item, idx) in ingredients" :key="item.id">
-          <span v-if="ingredients.length - 1 !== idx">{{ item.name }},&nbsp;</span>
-          <span v-else>{{ item.name }}</span>
-        </template>
-      </p>
-
       <div class="flex justify-between items-center mt-4">
         <span class="text-[20px]">
           от
-          <b>{{ price }} ₽</b>
+          <b>{{ currency(price) }} ₽</b>
         </span>
 
         <Button variant="secondary" class="text-base font-bold">
@@ -34,6 +27,8 @@ import type { Ingredient } from '@prisma/client'
 import { Plus } from 'lucide-vue-next'
 
 import { AppTitle } from '@/components/shared'
+
+import { currency } from '@/helpers'
 
 interface Props {
   id: number

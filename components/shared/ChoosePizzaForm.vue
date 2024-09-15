@@ -41,7 +41,7 @@
         class="h-[55px] px-10 text-base rounded-[18px] w-full"
         :disabled="loading"
       >
-        Добавить в корзину за {{ totalPrice }} ₽
+        Добавить в корзину за {{ currency(totalPrice) }} ₽
       </Button>
     </div>
   </div>
@@ -54,6 +54,7 @@ import { AppIngredient, AppTitle, GroupVariants, ProductImage } from '@/componen
 
 import { mapPizzType, pizzaSizes, pizzaTypes } from '@/constants/pizza'
 import type { PizzaSize, PizzaType } from '@/constants/pizza'
+import { currency } from '@/helpers'
 
 interface Props {
   imageUrl: string
@@ -68,7 +69,7 @@ const props = defineProps<Props>()
 const size = ref<PizzaSize>(20)
 const type = ref<PizzaType>(1)
 
-const textDetails = computed(() => `${size.value} см, ${mapPizzType[type.value]} пицца`)
+const textDetails = computed(() => `${size.value} мг, ${mapPizzType[type.value]} аромат`)
 const currentItemId = computed(() => props.items.find((item) => item.pizzaType === type.value && item.size === size.value)?.id)
 
 const selectedIngredients = ref(new Set<string>([]))

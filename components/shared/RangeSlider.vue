@@ -29,7 +29,7 @@ const props = defineProps<Props>()
 
 const valuesModel = defineModel<PriceProps>()
 
-const localValues = ref([valuesModel.value?.priceFrom || 0, valuesModel.value?.priceTo || 1000])
+const localValues = ref([valuesModel.value?.priceFrom || 0, valuesModel.value?.priceTo || 50000])
 
 watch(
   localValues,

@@ -2,7 +2,7 @@
   <WhiteBlock class="p-6">
     <div class="flex flex-col gap-1">
       <span class="text-xl">Итого:</span>
-      <span v-if="!store.loading" class="h-11 text-[34px] font-extrabold">{{ totalPrice }} ₽</span>
+      <span v-if="!store.loading" class="h-11 text-[34px] font-extrabold">{{ currency(totalPrice) }} ₽</span>
       <Skeleton v-else class="w-full h-11" />
     </div>
 
@@ -12,7 +12,7 @@
         {{ item.label }}:
       </div>
       <template v-slot:price>
-        <span v-if="!store.loading" class="font-bold text-lg">{{ item.displayValue }} ₽</span>
+        <span v-if="!store.loading" class="font-bold text-lg">{{ currency(item.displayValue) }} ₽</span>
         <Skeleton v-else class="w-16 h-6 rounded-[6px]" />
       </template>
     </CheckoutItemDetails>
@@ -29,6 +29,7 @@ import { ArrowRight, Package, Percent, Truck } from 'lucide-vue-next'
 
 import { CheckoutItemDetails, WhiteBlock } from '@/components/shared'
 
+import { currency } from '@/helpers'
 import { CartStore } from '@/stores/CartStore'
 
 interface Props {

@@ -57,7 +57,7 @@
                     <div class="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
                   </span>
 
-                  <span class="font-bold text-lg">{{ totalSum }} ₽</span>
+                  <span class="font-bold text-lg">{{ currency(totalSum) }} ₽</span>
                 </div>
 
                 <NuxtLink to="/checkout">
@@ -87,6 +87,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
 import { AppTitle, CartDrawerItem } from '@/components/shared'
 
 import type { PizzaSize, PizzaType } from '@/constants/pizza'
+import { currency } from '@/helpers'
 import { getCartItemDetails } from '@/lib/getCartItemDetails'
 import { CartStore } from '@/stores/CartStore'
 
