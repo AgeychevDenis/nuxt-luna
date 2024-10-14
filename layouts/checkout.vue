@@ -11,7 +11,7 @@
 import { AppHeader } from '@/components/shared'
 
 useHead({
-  title: 'Nuxt Pizza | Корзина',
+  title: 'Luna | Корзина',
 })
 </script>
 
