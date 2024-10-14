@@ -13,7 +13,7 @@
         :disabled="loading"
         class="h-[55px] px-10 text-base rounded-[18px] w-full"
       >
-        Добавить в корзину за {{ price }} ₽
+        Добавить в корзину за {{ currency(price) }} ₽
       </Button>
     </div>
   </div>
@@ -21,6 +21,8 @@
 
 <script setup lang="ts">
 import { AppTitle } from '@/components/shared'
+
+import { currency } from '@/helpers'
 
 interface Props {
   imageUrl: string

@@ -113,7 +113,7 @@ async function up() {
       generateProductItem({ productId: perfume3.id, pizzaType: 2, size: 30, price: 7999 }),
       generateProductItem({ productId: perfume3.id, pizzaType: 2, size: 40, price: 10639 }),
 
-      // Остальные продукты
+      // Остальные товары
       generateProductItem({ productId: 1, price: 1205 }),
       generateProductItem({ productId: 2 }),
       generateProductItem({ productId: 3 }),

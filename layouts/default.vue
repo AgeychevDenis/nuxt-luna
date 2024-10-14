@@ -11,7 +11,7 @@
 import AppHeader from '@/components/shared/AppHeader.vue'
 
 useHead({
-  title: 'Nuxt Pizza | Главная',
+  title: 'Luna | Главная',
 })
 </script>
 

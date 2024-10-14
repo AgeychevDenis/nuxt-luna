@@ -1,7 +1,7 @@
 <template>
   <div>
     <PlusModalLink :to="getProductPath(id)">
-      <div class="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
+      <div class="flex justify-center p-6 bg-white border-[1px] border-[#ddebff] rounded-lg h-[260px]">
         <img class="w-[215px] h-[215px]" :src="imageUrl" :alt="name" />
       </div>
 

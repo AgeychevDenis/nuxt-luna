@@ -7,7 +7,7 @@
       v-model="searchQuery"
       type="text"
       class="rounded-2xl outline-none w-full bg-gray-100 pl-11"
-      placeholder="Найти пиццу..."
+      placeholder="Найти товар..."
       @click="isFocused = true"
     />
 
