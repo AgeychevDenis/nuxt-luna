@@ -40,10 +40,10 @@ export default defineEventHandler(async (event) => {
 
     const html = `
     <p>Код подтверждения: <h2>${code}</h2></p>
-    <p><a href="https://nuxt-pizza.vercel.app/api/auth/verify?code=${code}">Подтвердить регистрацию</a></p>
+    <p><a href="https://nuxt-luna.vercel.app/api/auth/verify?code=${code}">Подтвердить регистрацию</a></p>
     `
 
-    await sendEmail(createdUser.email, 'Nuxt Pizza / Подтверждение регистрации', html)
+    await sendEmail(createdUser.email, 'Nuxt Luna / Подтверждение регистрации', html)
   } catch (error) {
     console.log('Error [CREATE_USER]', error)
     throw error

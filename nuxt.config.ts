@@ -28,9 +28,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: process.env.API_URL,
-      origin: process.env.NUXT_PUBLIC_ORIGIN || 'https://nuxt-pizza.vercel.app/',
+      origin: process.env.NUXT_PUBLIC_ORIGIN || 'https://nuxt-luna.vercel.app/',
     },
-    authOrigin: 'https://nuxt-pizza.vercel.app/',
+    authOrigin: 'https://nuxt-luna.vercel.app/',
   },
   auth: {
     provider: {
